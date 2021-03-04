@@ -1,0 +1,1 @@
+const GENESIS_DATA = {};
