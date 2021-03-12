@@ -12,6 +12,6 @@ yo bro i'm just adding the list of mods that we need to do after this course is 
       <li> Or even word of mouth commuincation
       <li> Anything actually
     </ol>
-  <li> start project seraph (post quantum crytography attempts)
-  <li> stronger the encryption, larger the encrypted data becomes => setting up variable encryption that gives a miced choice of speed or security 
+  <li> Start project seraph (post quantum cryptography attempts)
+  <li> Stronger the encryption, larger the encrypted data becomes => setting up variable encryption that gives a mixed choice of speed or security 
 </ol>
