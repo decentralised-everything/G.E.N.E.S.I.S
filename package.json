@@ -10,7 +10,7 @@
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' nodemon index.js",
     "start-redis": "redis-server --daemonize yes",
     "build-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
-    "dev-client": "npm run clean && parcel client/src/index.html --out.dir client/dist",
+    "dev-client": "npm run clean && parcel client/src/index.html --out-dir client/dist",
     "clean": "rm -rf .cache client/dist"
   },
   "jest": {
@@ -25,6 +25,11 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "body-parser": "^1.19.0",
     "elliptic": "^6.5.4",
     "express": "^4.17.1",
