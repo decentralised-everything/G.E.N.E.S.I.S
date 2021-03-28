@@ -33,6 +33,7 @@
     "body-parser": "^1.19.0",
     "elliptic": "^6.5.4",
     "express": "^4.17.1",
+    "heroku": "^7.51.0",
     "hex-to-binary": "^1.0.1",
     "history": "^4.7.2",
     "parcel-bundler": "^1.12.4",
