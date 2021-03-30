@@ -37,30 +37,39 @@ class ConductTransaction extends Component {
 
   render() {
     return (
-      <div className="ConductTransaction">
-        <Link to="/">Home</Link>
-        <h3>Conduct a Transaction</h3>
+       <div className="bg-white h-screen w-full flex-col justify-center">
+        <div className="shadow w-screen py-2 z-10"><div className="justify-end flex my-2">
+            <div className="mx-2">
+                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" to="/">Home</Link>
+            </div>
+      		</div>
+	</div>
+        <h3 className="text-gray-600 my-8">Conduct a Transaction</h3>
         <br />
-        <h4>Known Addresses</h4>
+        <h4 className="text-gray-600">Known Addresses</h4>
+	<div className="flex justify-items-center justify-center w-3/5">
         {this.state.knownAddresses.map((knownAddress) => {
           return (
-            <div key={knownAddress}>
-              <div>{knownAddress}</div>
+            <div className="text-gray-600" key={knownAddress}>
+              <div className="transition duration-100 hover:shadow rounded-full overflow-hidden w-32 h-8 px-2 mr-2 px-2">{`@${knownAddress}`}</div>
               <br />
             </div>
           );
         })}
+	</div>
         <br />
-        <FormGroup>
+        <FormGroup className="my-8">
           <FormControl
+	    className="rounded-full px-6 py-2 bg-gray-200"
             input="text"
             placeholder="recipient"
             value={this.state.recipient}
             onChange={this.updateRecipient}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="my-8">
           <FormControl
+	    className="rounded-full px-6 py-2 bg-gray-200"
             input="number"
             placeholder="amount"
             value={this.state.amount}
@@ -68,7 +77,7 @@ class ConductTransaction extends Component {
           />
         </FormGroup>
         <div>
-          <Button bsStyle="danger" onClick={this.conductTransaction}>
+          <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" onClick={this.conductTransaction}>
             Submit
           </Button>
         </div>

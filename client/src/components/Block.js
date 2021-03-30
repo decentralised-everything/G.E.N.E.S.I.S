@@ -44,6 +44,7 @@ class Block extends Component {
       <div>
         <div>Data: {dataDisplay}</div>
         <Button
+	  className="bg-gray-200 rounded-full px-8 py-2 text-gray-700 shadow "
           bsStyle="danger"
           bsSize="small"
           onClick={this.toggleTransaction}
@@ -57,12 +58,12 @@ class Block extends Component {
   render() {
     const { timestamp, hash } = this.props.block;
 
-    const hashDisplay = `${hash.substring(0, 15)}...`;
+    const hashDisplay = `#${hash.substring(0, 15)}...`;
 
     return (
-      <div className="Block">
-        <div>Hash: {hashDisplay}</div>
-        <div>Timestamp: {new Date(timestamp).toLocaleString()}</div>
+      <div className="text-gray-700 bg-gray-50 rounded-lg mx-auto my-8">
+        <div className="text-gray-700 font-bold">{hashDisplay}</div>
+        <div className="text-gray-700">{new Date(timestamp).toLocaleString()}</div>
 
         {this.displayTransaction}
       </div>

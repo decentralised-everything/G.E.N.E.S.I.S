@@ -43,11 +43,14 @@ class TransactionPool extends Component {
 
   render() {
     return (
-      <div className="TransactionPool">
-        <div>
-          <Link to="/">Home</Link>
-        </div>
-        <h3>Transaction Pool</h3>
+      <div className="bg-white h-screen w-full flex-col justify-center">
+        <div className="shadow w-screen py-2 z-10"><div className="justify-end flex my-2">
+            <div className="mx-2">
+                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" to="/">Home</Link>
+            </div>
+      		</div>
+	</div>
+        <h3 className="text-gray-600 my-8">Transaction Pool</h3>
         {Object.values(this.state.transactionPoolMap).map((transaction) => {
           return (
             <div key={transaction.id}>
@@ -57,7 +60,7 @@ class TransactionPool extends Component {
           );
         })}
         <hr />
-        <Button bsStyle="danger" onClick={this.fetchMineTransactions}>
+        <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" onClick={this.fetchMineTransactions}>
           Mine the Transactions
         </Button>
       </div>
