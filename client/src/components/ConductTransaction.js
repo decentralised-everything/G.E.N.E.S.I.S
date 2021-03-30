@@ -62,7 +62,7 @@ class ConductTransaction extends Component {
           <FormControl
 	    className="rounded-full px-6 py-2 bg-gray-200 text-gray-600"
             input="text"
-            placeholder="recipient"
+            placeholder="@geniusss"
             value={this.state.recipient}
             onChange={this.updateRecipient}
           />
