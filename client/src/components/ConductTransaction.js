@@ -60,7 +60,7 @@ class ConductTransaction extends Component {
         <br />
         <FormGroup className="my-8">
           <FormControl
-	    className="rounded-full px-6 py-2 bg-gray-200"
+	    className="rounded-full px-6 py-2 bg-gray-200 text-gray-600"
             input="text"
             placeholder="recipient"
             value={this.state.recipient}
@@ -69,7 +69,7 @@ class ConductTransaction extends Component {
         </FormGroup>
         <FormGroup className="my-8">
           <FormControl
-	    className="rounded-full px-6 py-2 bg-gray-200"
+	    className="rounded-full px-6 py-2 bg-gray-200 text-gray-600"
             input="number"
             placeholder="amount"
             value={this.state.amount}
