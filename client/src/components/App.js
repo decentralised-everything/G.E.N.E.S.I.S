@@ -28,7 +28,7 @@ class App extends Component {
                 <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" to="/transaction-pool">Pool</Link>
             </div>
             <div className="ml-8 mr-2 justify-center text-gray-600 flex">
-                <div className="transition duration-100 hover:shadow rounded-full overflow-hidden w-32 h-8 px-2 mr-2 px-2">{`@${address_short}`}</div>{" | "}<div className="transition duration-100 hover:shadow rounded-full px-2 ml-2 w-32 px-2">{`B: ${balance}`}</div>
+                <div data-clipboard-text={`${address_short}`} className="copy_text transition duration-100 hover:shadow rounded-full overflow-hidden w-32 h-8 px-2 mr-2 px-2">{`@${address_short}`}</div>{" | "}<div className="transition duration-100 hover:shadow rounded-full px-2 ml-2 w-32 px-2">{`B: ${balance}`}</div>
             </div>
       </div></div>
             <div className="text-gray-600">Welcome to the blockchain...</div>
