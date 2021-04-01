@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Transaction from "./Transaction";
-
 class Block extends Component {
   state = { displayTransaction: false };
 
@@ -21,10 +20,9 @@ class Block extends Component {
 
     if (this.state.displayTransaction) {
       return (
-        <div>
+        <div className="justify-center">
           {data.map((transaction) => (
             <div key={transaction.id}>
-              <hr />
               <Transaction transaction={transaction} />
             </div>
           ))}
@@ -61,7 +59,7 @@ class Block extends Component {
     const hashDisplay = `#${hash.substring(0, 15)}...`;
 
     return (
-      <div className="text-gray-700 bg-gray-50 rounded-lg mx-auto my-8">
+      <div className="text-gray-700 bg-gray-50 rounded-lg mx-auto my-8 shadow-sm">
         <div className="text-gray-700 font-bold">{hashDisplay}</div>
         <div className="text-gray-700">{new Date(timestamp).toLocaleString()}</div>
 

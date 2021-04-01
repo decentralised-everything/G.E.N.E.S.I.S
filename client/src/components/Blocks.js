@@ -50,7 +50,7 @@ class Blocks extends Component {
             }
           )}
         </div>
-	<div className="bg-white rounded w-3/5 justify-center justify-items-center">
+	<div className="bg-white rounded w-3/5 justify-center justify-items-center mx-auto">
         {this.state.blocks.map((block) => {
           return <Block key={block.hash} block={block} />;
         })}

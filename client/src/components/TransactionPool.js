@@ -53,7 +53,7 @@ class TransactionPool extends Component {
         <h3 className="text-gray-600 my-8">Transaction Pool</h3>
         {Object.values(this.state.transactionPoolMap).map((transaction) => {
           return (
-            <div key={transaction.id}>
+            <div className="w-3/5 shadow rounded-lg border-red-600 mx-auto" key={transaction.id}>
               <hr />
               <Transaction transaction={transaction} />
             </div>
