@@ -40,7 +40,7 @@ class ConductTransaction extends Component {
        <div className="bg-white h-screen w-full flex-col justify-center">
         <div className="shadow w-screen py-2 z-10"><div className="justify-end flex my-2">
             <div className="mx-2">
-                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline transition-colors duration-150 hover:bg-red-600" to="/">Home</Link>
+                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline transition-colors duration-150 hover:bg-red-600 hover:text-white" to="/">Home</Link>
             </div>
       		</div>
 	</div>
@@ -51,7 +51,7 @@ class ConductTransaction extends Component {
         {this.state.knownAddresses.map((knownAddress) => {
           return (
             <div className="text-gray-600" key={knownAddress}>
-              <div data-clipboard-text={`${knownAddress}`} className="copy_text select-none cursor-pointer transition duration-100 hover:shadow bg-white active:bg-red-600 rounded-full overflow-hidden w-32 h-8 px-2 mr-2 px-2">{`@${knownAddress}`}</div>
+              <div data-clipboard-text={`${knownAddress}`} className="copy_text select-none cursor-pointer transition duration-100 hover:shadow bg-white active:bg-red-600 active:text-white rounded-full overflow-hidden w-32 h-8 px-2 mr-2 px-2">{`@${knownAddress}`}</div>
               <br />
             </div>
           );
@@ -77,7 +77,7 @@ class ConductTransaction extends Component {
           />
         </FormGroup>
         <div>
-          <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline hover:bg-red-600" onClick={this.conductTransaction}>
+          <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline hover:bg-red-600 hover:text-white" onClick={this.conductTransaction}>
             Submit
           </Button>
         </div>

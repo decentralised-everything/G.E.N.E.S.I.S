@@ -46,7 +46,7 @@ class TransactionPool extends Component {
       <div className="bg-white h-screen w-full flex-col justify-center">
         <div className="shadow w-screen py-2 z-10"><div className="justify-end flex my-2">
             <div className="mx-2">
-                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" to="/">Home</Link>
+                <Link className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline transition-colors duration-150 hover:bg-red-600 hover:text-white" to="/">Home</Link>
             </div>
       		</div>
 	</div>
@@ -60,7 +60,7 @@ class TransactionPool extends Component {
           );
         })}
         <hr />
-        <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline" onClick={this.fetchMineTransactions}>
+        <Button bsStyle="danger" className="bg-gray-100 rounded-full px-8 py-2 text-gray-700 no-underline hover:no-underline transition-colors duration-150 hover:bg-red-600 hover:text-white" onClick={this.fetchMineTransactions}>
           Mine the Transactions
         </Button>
       </div>
