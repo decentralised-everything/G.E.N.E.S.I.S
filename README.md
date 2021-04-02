@@ -1,5 +1,5 @@
 # G.E.N.E.S.I.S.
-yo bro i'm just adding the list of mods that we need to do after this course is completed
+yo bro i'm just adding the list of mods that we need to do:
 <ol>
   <li> Stop cross-side scripting attacks
   <li> Find a proper alternative to Proof of Work
