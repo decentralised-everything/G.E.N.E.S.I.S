@@ -34,13 +34,30 @@ const transactionMiner = new TransactionMiner({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
 
+//-------------------------------------------
+app.post(":publicKey/api/blocks/length/post", (req, res) => {
+    const { publicKey } = req.params;
+    const { data } = req.body;
+    app.emit(`${publicKey}/api/blocks/length/post`, data);
+});
+app.post(":publicKey/api/blocks/post", (req, res) => {
+  const { publicKey } = req.params;
+    const { data } = req.body;
+
+  PubSub.broadcastChain(data);
+  app.emit(`${publicKey}/api/blocks/post`, data);
+});
+
+////////////////////////////////////////////////////////
 app.get("/api/blocks", (req, res) => {
   res.json(blockchain.chain);
 });
 
+
 app.get("/api/blocks/length", (req, res) => {
   res.json(blockchain.chain.length);
 });
+
 
 app.get("/api/blocks/:id", (req, res) => {
   const { id } = req.params;
