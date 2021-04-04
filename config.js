@@ -1,3 +1,5 @@
+const express = require("express");
+const app = express();
 const MINE_RATE = 1000;
 const INITIAL_DIFFICULTY = 3;
 
@@ -19,6 +21,7 @@ const REWARD_INPUT = {
 const MINING_REWARD = 50;
 
 module.exports = {
+  app,
   GENESIS_DATA,
   MINE_RATE,
   STARTING_BALANCE,

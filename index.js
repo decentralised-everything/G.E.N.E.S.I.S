@@ -1,5 +1,10 @@
+/* guideline: should work for websites (via frontend) and also with ppl running the process on their own computers (apps)
+ *
+ *
+ *
+ */
 const bodyParser = require("body-parser");
-const express = require("express");
+const { app } = require ("./config");
 const request = require("request");
 const path = require("path");
 const Blockchain = require("./blockchain");
@@ -18,7 +23,6 @@ const REDIS_URL = isDevelopment ?
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
-const app = express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
@@ -33,32 +37,31 @@ const transactionMiner = new TransactionMiner({
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
-
-//-------------------------------------------
+// gotta kill someday
 app.post(":publicKey/api/blocks/length/post", (req, res) => {
     const { publicKey } = req.params;
     const { data } = req.body;
     app.emit(`${publicKey}/api/blocks/length/post`, data);
 });
+// let publickey be there so that rewards and all exists
 app.post(":publicKey/api/blocks/post", (req, res) => {
   const { publicKey } = req.params;
     const { data } = req.body;
 
   PubSub.broadcastChain(data);
-  app.emit(`${publicKey}/api/blocks/post`, data);
 });
 
-////////////////////////////////////////////////////////
 app.get("/api/blocks", (req, res) => {
-  res.json(blockchain.chain);
+  app.once('blockchain', (data) => {
+	  res.json(data);
+	})
 });
-
-
+// gotta kil someday
 app.get("/api/blocks/length", (req, res) => {
   res.json(blockchain.chain.length);
 });
 
-
+// gotta really kill someday
 app.get("/api/blocks/:id", (req, res) => {
   const { id } = req.params;
   const { length } = blockchain.chain;
@@ -73,7 +76,7 @@ app.get("/api/blocks/:id", (req, res) => {
 
   res.json(blocksReversed.slice(startIndex, endIndex));
 });
-
+// kill it
 app.post("/api/mine", (req, res) => {
   const { data } = req.body;
 
@@ -83,7 +86,7 @@ app.post("/api/mine", (req, res) => {
 
   res.redirect("/api/blocks");
 });
-
+// merge this with transaction-pool-map
 app.post("/api/transact", (req, res) => {
   const { amount, recipient } = req.body;
 
@@ -113,15 +116,18 @@ app.post("/api/transact", (req, res) => {
 });
 
 app.get("/api/transaction-pool-map", (req, res) => {
-  res.json(transactionPool.transactionMap);
-});
+  app.once('transaction-pool', (data) => {
+	  	res.json(data);
+	})
 
+});
+// goes to the frontend
 app.get("/api/mine-transactions", (req, res) => {
   transactionMiner.mineTransactions();
 
   res.redirect("/api/blocks");
 });
-
+// bring that to the frontend
 app.get("/api/wallet-info", (req, res) => {
   const address = wallet.publicKey;
 
@@ -130,7 +136,7 @@ app.get("/api/wallet-info", (req, res) => {
     balance: Wallet.calculateBalance({ chain: blockchain.chain, address }),
   });
 });
-
+// kill it
 app.get("/api/known-addresses", (req, res) => {
   const addressMap = {};
 
@@ -148,7 +154,7 @@ app.get("/api/known-addresses", (req, res) => {
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
-
+// END of mods
 const syncWithRootState = () => {
   request(
     { url: `${ROOT_NODE_ADDRESS}/api/blocks` },

@@ -1,6 +1,6 @@
 const redis = require("redis");
 const { parse } = require("uuid");
-const Events = require ("events");
+const { app } = require ("../config");
 const CHANNELS = {
   TEST: "TEST",
   BLOCKCHAIN: "BLOCKCHAIN",
@@ -13,8 +13,6 @@ class PubSub {
 
     this.publisher = redis.createClient(redisUrl);
     this.subscriber = redis.createClient(redisUrl);
-    
-    this.events = new Events();
     this.subscribeToChannels();
 
     this.subscriber.on("message", (channel, message) =>
@@ -34,12 +32,12 @@ class PubSub {
             chain: parsedMessage,
           });
           
-        this.events.emit('blockchain', parsedMessage);  // extra line 
+        app.emit('blockchain', parsedMessage);  // extra line 
         });
         break;
       case CHANNELS.TRANSACTION:
         this.transactionPool.setTransaction(parsedMessage);
-        this.events.emit('transaction-pool', parsedMessage);  // extra line 
+        app.emit('transaction-pool', parsedMessage);  // extra line 
         break;
       default:
         return;
