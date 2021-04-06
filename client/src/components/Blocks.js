@@ -33,6 +33,7 @@ class Blocks extends Component {
           renderItem={this.renderBlock}
           renderWhenEmpty={() => <div>List is empty!</div>}
           sortBy={["timestamp", {key: "hash", descending: true}]}
+          renderOnScroll
         />
 	</div>
       </div>
