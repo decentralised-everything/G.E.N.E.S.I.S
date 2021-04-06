@@ -4,7 +4,7 @@
  *
  */
 const bodyParser = require("body-parser");
-const { app } = require ("./config");
+const { app } = require("./config");
 const request = require("request");
 const path = require("path");
 const Blockchain = require("./blockchain");
@@ -13,10 +13,10 @@ const TransactionPool = require("./wallet/transaction-pool");
 const Wallet = require("./wallet");
 const TransactionMiner = require("./app/transaction-miner");
 
-const isDevelopment = (process.env.ENV === 'development');
+const isDevelopment = process.env.ENV === "development";
 
-const REDIS_URL = isDevelopment ?
-    "redis://127.0.0.1:6379"
+const REDIS_URL = isDevelopment
+  ? "redis://127.0.0.1:6379"
   : "redis://:p1cedb41e24fca21ed276d480d96469ddfbd5762419ded5b33d8d90d80899e914@ec2-35-169-115-180.compute-1.amazonaws.com:27939";
 
 // const REDIS_URL = "redis://:p1cedb41e24fca21ed276d480d96469ddfbd5762419ded5b33d8d90d80899e914@ec2-35-169-115-180.compute-1.amazonaws.com:27939";
@@ -39,22 +39,22 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
 // gotta kill someday
 app.post(":publicKey/api/blocks/length/post", (req, res) => {
-    const { publicKey } = req.params;
-    const { data } = req.body;
-    app.emit(`${publicKey}/api/blocks/length/post`, data);
+  const { publicKey } = req.params;
+  const { data } = req.body;
+  app.emit(`${publicKey}/api/blocks/length/post`, data);
 });
 // let publickey be there so that rewards and all exists
 app.post(":publicKey/api/blocks/post", (req, res) => {
   const { publicKey } = req.params;
-    const { data } = req.body;
+  const { data } = req.body;
 
   PubSub.broadcastChain(data);
 });
 
 app.get("/api/blocks", (req, res) => {
-  app.once('blockchain', (data) => {
-	  res.json(data);
-	})
+  app.once("blockchain", (data) => {
+    res.json(data);
+  });
 });
 // merge this with transaction-pool-map
 app.post("/api/transact", (req, res) => {
@@ -192,7 +192,7 @@ if (isDevelopment) {
 
 let PEER_PORT;
 
-if (process.env.GENERATE_PEER_PORT === 'true') {
+if (process.env.GENERATE_PEER_PORT === "true") {
   PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
 }
 

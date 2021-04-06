@@ -42,7 +42,7 @@ class Block extends Component {
       <div>
         <div>Data: {dataDisplay}</div>
         <Button
-	  className="bg-gray-200 rounded-full px-8 py-2 text-gray-700 shadow transition-colors duration-150 hover:bg-red-600 hover:text-white"
+          className="bg-gray-200 rounded-full px-8 py-2 text-gray-700 shadow transition-colors duration-150 hover:bg-red-600 hover:text-white"
           bsStyle="danger"
           bsSize="small"
           onClick={this.toggleTransaction}
@@ -61,7 +61,9 @@ class Block extends Component {
     return (
       <div className="text-gray-700 bg-gray-50 rounded-lg mx-auto my-8 shadow-sm">
         <div className="text-gray-700 font-bold">{hashDisplay}</div>
-        <div className="text-gray-700">{new Date(timestamp).toLocaleString()}</div>
+        <div className="text-gray-700">
+          {new Date(timestamp).toLocaleString()}
+        </div>
 
         {this.displayTransaction}
       </div>

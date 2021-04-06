@@ -15,8 +15,16 @@ render(
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/blocks" component={Blocks} entity={Miner_account} />
-      <Route path="/conduct-transaction" component={ConductTransaction} entity={Miner_account} />
-      <Route path="/transaction-pool" component={TransactionPool} entity={Miner_account} />
+      <Route
+        path="/conduct-transaction"
+        component={ConductTransaction}
+        entity={Miner_account}
+      />
+      <Route
+        path="/transaction-pool"
+        component={TransactionPool}
+        entity={Miner_account}
+      />
     </Switch>
   </Router>,
   document.getElementById("root")

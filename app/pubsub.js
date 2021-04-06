@@ -1,6 +1,6 @@
 const redis = require("redis");
 const { parse } = require("uuid");
-const { app } = require ("../config");
+const { app } = require("../config");
 const CHANNELS = {
   TEST: "TEST",
   BLOCKCHAIN: "BLOCKCHAIN",
@@ -19,15 +19,15 @@ class PubSub {
       this.handleMessage(channel, message)
     );
   }
-  get blockchain(){
-	return this.blockchain
-}
-set blockchain(blockchain){
-	this.blockchain = blockchain;
-}
-set chain(chain){
-	this.blockchain.chain = chain;
-}
+  get blockchain() {
+    return this.blockchain;
+  }
+  set blockchain(blockchain) {
+    this.blockchain = blockchain;
+  }
+  set chain(chain) {
+    this.blockchain.chain = chain;
+  }
   handleMessage(channel, message) {
     console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
 
@@ -39,13 +39,13 @@ set chain(chain){
           this.transactionPool.clearBlockchainTransactions({
             chain: parsedMessage,
           });
-          
-        app.emit('blockchain', parsedMessage);  // extra line 
+
+          app.emit("blockchain", parsedMessage); // extra line
         });
         break;
       case CHANNELS.TRANSACTION:
         this.transactionPool.setTransaction(parsedMessage);
-        app.emit('transaction-pool', parsedMessage);  // extra line 
+        app.emit("transaction-pool", parsedMessage); // extra line
         break;
       default:
         return;
