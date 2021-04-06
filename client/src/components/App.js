@@ -7,9 +7,10 @@ class App extends Component {
   state = { walletInfo: {} };
 
   componentDidMount() {
-    fetch(`${document.location.origin}/api/wallet-info`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ walletInfo: json }));
+     this.setState({ walletInfo: {
+    address: wallet.publicKey,
+    balance: Wallet.calculateBalance({ chain: account.blockchain.chain, wallet.publicKey }),
+  } });
   }
 
   render() {

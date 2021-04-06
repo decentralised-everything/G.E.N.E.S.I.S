@@ -1,28 +1,23 @@
+import FlatList from 'flatlist-react';
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Block from "./Block";
 
 class Blocks extends Component {
-  state = { blocks: [], paginatedId: 1, blocksLength: 0 };
-
+  state = { blocks: [] };
+    const account = this.props.entity;
+    
   componentDidMount() {
-    fetch(`${document.location.origin}/api/blocks/length`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ blocksLength: json }));
-
-    this.fetchPaginatedBlocks(this.state.paginatedId)();
+    fetch(`${document.location.origin}/api/blocks`)
+	.then((response) => response.json())
+	.then((chain) => account.blockchain = chain)
   }
 
-  fetchPaginatedBlocks = (paginatedId) => () => {
-    fetch(`${document.location.origin}/api/blocks/${paginatedId}`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ blocks: json }));
-  };
-
+    renderBlock = (block) => {
+          return <Block key={block.hash} block={block} />;
+        }
   render() {
-    console.log("this.state", this.state);
-
     return (
       <div className="bg-white h-screen w-full flex-col justify-center">
         <div className="shadow w-screen py-2 z-10"><div className="justify-end flex my-2">
@@ -32,28 +27,13 @@ class Blocks extends Component {
       		</div>
 	</div>
         <h3 className="text-gray-600 my-2">Blocks</h3>
-        <div className="rounded">
-          {[...Array(Math.ceil(this.state.blocksLength / 5)).keys()].map(
-            (key) => {
-              const paginatedId = key + 1;
-
-              return (
-                <span
-                  key={key}
-                  onClick={this.fetchPaginatedBlocks(paginatedId)}
-                >
-                  <Button className="bg-gray-400 rounded-full px-4 py-2 transition-colors duration-150 hover:bg-red-600 hover:text-white" bsSize="small" bsStyle="danger">
-                    {paginatedId}
-                  </Button>{" "}
-                </span>
-              );
-            }
-          )}
-        </div>
 	<div className="bg-white rounded w-3/5 justify-center justify-items-center mx-auto">
-        {this.state.blocks.map((block) => {
-          return <Block key={block.hash} block={block} />;
-        })}
+        <FlatList
+          list={account.blockchain.chain}
+          renderItem={this.renderBlock}
+          renderWhenEmpty={() => <div>List is empty!</div>}
+          sortBy={["timestamp", {key: "hash", descending: true}]}
+        />
 	</div>
       </div>
     );

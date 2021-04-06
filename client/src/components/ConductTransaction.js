@@ -5,8 +5,10 @@ import history from "../history";
 
 class ConductTransaction extends Component {
   state = { recipient: "", amount: 0, knownAddresses: [] };
+  const account = this.props.entity;
 
   componentDidMount() {
+//change this
     fetch(`${document.location.origin}/api/known-addresses`)
       .then((response) => response.json())
       .then((json) => this.setState({ knownAddresses: json }));
@@ -22,16 +24,37 @@ class ConductTransaction extends Component {
 
   conductTransaction = () => {
     const { recipient, amount } = this.state;
+    fetch(`${document.location.origin}/api/blocks`)
+	.then((response) => response.json())
+	.then((chain) => account.blockchain = chain)
+	.then(() => {
+        let transaction = account.transactionPool.existingTransaction({
+    inputAddress: account.wallet.publicKey,
+  });
+		 try {
+    if (transaction) {
+      transaction.update({ senderWallet: account.wallet, recipient, amount });
+    } else {
+      transaction = account.wallet.createTransaction({
+        recipient,
+        amount,
+        chain: account.blockchain.chain,
+      });
+    }
+    return transaction;
+  } catch (error) {
+    return false;
+  }}
+		)
+      .then((transaction) => {
+	if(transaction){
+		alert("yaay! its a success");
+            account.transactionPool.setTransaction(transaction);
+            account.broadcastTransaction(transaction);
+        	history.push("/transaction-pool");
+	}
 
-    fetch(`${document.location.origin}/api/transact`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ recipient, amount }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        alert(json.message || json.type);
-        history.push("/transaction-pool");
+	else {alert("oops! Tht didnt work")}
       });
   };
 

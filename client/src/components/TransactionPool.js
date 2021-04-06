@@ -8,24 +8,19 @@ const POLL_INTERVAL_MS = 10000;
 
 class TransactionPool extends Component {
   state = { transactionPoolMap: {} };
-
+  const account = this.props.entity;
+  
   fetchTransactionPoolMap = () => {
-    fetch(`${document.location.origin}/api/transaction-pool-map`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ transactionPoolMap: json }));
+        this.setState({ transactionPoolMap: account.transactionPool.transactionMap });
   };
 
   fetchMineTransactions = () => {
-    fetch(`${document.location.origin}/api/mine-transactions`).then(
-      (response) => {
-        if (response.status === 200) {
+        if (account.mineTransactions()) {
           alert("success");
           history.push("/blocks");
         } else {
           alert("The mine-transactions block request did not complete.");
-        }
       }
-    );
   };
 
   componentDidMount() {

@@ -19,7 +19,15 @@ class PubSub {
       this.handleMessage(channel, message)
     );
   }
-
+  get blockchain(){
+	return this.blockchain
+}
+set blockchain(blockchain){
+	this.blockchain = blockchain;
+}
+set chain(chain){
+	this.blockchain.chain = chain;
+}
   handleMessage(channel, message) {
     console.log(`Message received. Channel: ${channel}. Message: ${message}.`);
 

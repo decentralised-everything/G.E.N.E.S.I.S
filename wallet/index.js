@@ -5,7 +5,7 @@ const { ec, cryptoHash } = require("../util");
 class Wallet {
   constructor() {
     this.balance = STARTING_BALANCE;
-
+	// gotta find a way to store it for the user
     this.keyPair = ec.genKeyPair();
 
     this.publicKey = this.keyPair.getPublic().encode("hex");
@@ -25,6 +25,7 @@ class Wallet {
 
     if (amount > this.balance) {
       throw new Error("Amount exceeds balance");
+	return false;
     }
 
     return new Transaction({ senderWallet: this, recipient, amount });
