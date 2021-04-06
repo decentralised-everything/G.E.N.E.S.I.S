@@ -1,0 +1,94 @@
+npm install collect.js --save
+yarn add collect.js
+var card = {
+  "payment_method":{
+    "credit_card":{
+      "first_name": "Joe",
+      "last_name": "Jones",
+      "number":"5555555555554444",
+      "verification_value": "423",
+      "month":"3",
+      "year":"2032",
+      "email": "joey@example.com"
+    },
+    "data": {
+      "my_payment_method_identifier": "448",
+      "extra_stuff": {
+        "some_other_things": "Can be anything really"
+      }
+    }
+  }
+} 
+var url = "https://core.spreedly.com/v1/payment_methods.json?environment_key=C7cRfNJGODKh4Iu5Ox3PToKjniY";
+
+$.ajax({
+  type: "POST",
+  url: url,
+  dataType: "json",
+  data: card
+}).success(function(data) {
+  console.log(data);
+  alert(data.transaction.payment_method.token);
+}).error(function(request, status, error) {
+  console.log(error);
+  alert('error');
+});
+
+{
+  "transaction": {
+    "token": "MUn2wNmRCnxhNfXClPTE0nDQ7sI",
+    "created_at": "2017-07-27T17:51:30Z",
+    "updated_at": "2017-07-27T17:51:30Z",
+    "succeeded": true,
+    "transaction_type": "AddPaymentMethod",
+    "retained": false,
+    "state": "succeeded",
+    "message_key": "messages.transaction_succeeded",
+    "message": "Succeeded!",
+    "payment_method": {
+      "token": "Vv2Rvt0GJptSjupHjBK9q5KP3lO",
+      "created_at": "2017-07-27T17:51:30Z",
+      "updated_at": "2017-07-27T17:51:30Z",
+      "email": null,
+      "data": {
+        "my_payment_method_identifier": 448,
+        "extra_stuff": {
+          "some_other_things": "Can be anything really"
+        }
+      },
+      "storage_state": "cached",
+      "test": true,
+      "last_four_digits": "4444",
+      "first_six_digits": "555555",
+      "card_type": "master",
+      "first_name": "Madhav",
+      "last_name": "M",
+      "month": 3,
+      "year": 2032,
+      "address1": null,
+      "address2": null,
+      "city": null,
+      "state": null,
+      "zip": null,
+      "country": null,
+      "phone_number": null,
+      "company": null,
+      "full_name": "Madhav M",
+      "eligible_for_card_updater": true,
+      "shipping_address1": null,
+      "shipping_address2": null,
+      "shipping_city": null,
+      "shipping_state": null,
+      "shipping_zip": null,
+      "shipping_country": null,
+      "shipping_phone_number": null,
+      "payment_method_type": "credit_card",
+      "errors": [
+
+      ],
+      "fingerprint": "b5fe350d5135ab64a8f3c1097fadefd9effb",
+      "verification_value": "XXX",
+      "number": "XXXX-XXXX-XXXX-4444"
+    }
+  }
+}
