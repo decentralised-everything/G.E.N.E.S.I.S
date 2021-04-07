@@ -6,10 +6,10 @@ import App from "./components/App";
 import Blocks from "./components/Blocks";
 import ConductTransaction from "./components/ConductTransaction";
 import TransactionPool from "./components/TransactionPool";
-import { miner } from "../../app/transaction-miner";
+import { Person } from "../../app/transaction-miner";
 import "./dist/style.css";
 
-const Miner_account = miner();
+const Miner_account = Person();
 render(
   <Router history={history}>
     <Switch>

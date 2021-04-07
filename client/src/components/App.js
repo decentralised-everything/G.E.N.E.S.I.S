@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Wallet from "../../../wallet";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import "../dist/style.css";
@@ -9,7 +10,7 @@ class App extends Component {
   componentDidMount() {
      this.setState({ walletInfo: {
     address: wallet.publicKey,
-    balance: Wallet.calculateBalance({ chain: account.blockchain.chain, wallet.publicKey }),
+    balance: Wallet.calculateBalance({ chain: account.blockchain.chain, address: wallet.publicKey }),
   } });
   }
 

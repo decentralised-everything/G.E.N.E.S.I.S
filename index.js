@@ -4,7 +4,7 @@
  *
  */
 const bodyParser = require("body-parser");
-const { app } = require("./config");
+const express = require("express");
 const request = require("request");
 const path = require("path");
 const Blockchain = require("./blockchain");
@@ -22,7 +22,7 @@ const REDIS_URL = isDevelopment
 // const REDIS_URL = "redis://:p1cedb41e24fca21ed276d480d96469ddfbd5762419ded5b33d8d90d80899e914@ec2-35-169-115-180.compute-1.amazonaws.com:27939";
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
-
+const app = new express();
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
@@ -38,11 +38,6 @@ const transactionMiner = new TransactionMiner({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
 // gotta kill someday
-app.post(":publicKey/api/blocks/length/post", (req, res) => {
-  const { publicKey } = req.params;
-  const { data } = req.body;
-  app.emit(`${publicKey}/api/blocks/length/post`, data);
-});
 // let publickey be there so that rewards and all exists
 app.post(":publicKey/api/blocks/post", (req, res) => {
   const { publicKey } = req.params;

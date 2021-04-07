@@ -10,8 +10,8 @@
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon index.js",
     "start-redis": "redis-server --daemonize yes",
     "build-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
-    "dev-client": "npm run clean && parcel client/src/index.html --out-dir client/dist",
-    "clean": "rm -rf .cache client/dist",
+    "dev-client": "npm run clean && parcel build client/src/index.html --out-dir client/dist",
+    "clean": "rm -rf .cache",
     "build:css": "NODE_ENV=production tailwind build client/src/src/style.css -o client/src/dist/style.css",
     "maddy-start": "npm run build:css && npm run build-client && node index.js"
   },
@@ -27,7 +27,7 @@
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "postcss": "^8.2.8",
-    "tailwindcss": "^2.0.4"
+    "tailwindcss": "^2.1.1"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
@@ -43,7 +43,7 @@
     "heroku-cli": "^7.0.9",
     "hex-to-binary": "^1.0.1",
     "history": "^4.7.2",
-    "parcel-bundler": "^1.12.4",
+    "parcel-bundler": "^1.12.5",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",

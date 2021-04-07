@@ -8,15 +8,19 @@ const POLL_INTERVAL_MS = 10000;
 
 class TransactionPool extends Component {
   state = { transactionPoolMap: {} };
-  const account = this.props.entity;
   
   fetchTransactionPoolMap = () => {
-        this.setState({ transactionPoolMap: account.transactionPool.transactionMap });
+        this.setState({ transactionPoolMap: this.props.entity.transactionPool.transactionMap });
   };
 
   fetchMineTransactions = () => {
-        if (account.mineTransactions()) {
+        if (this.props.entity.mineTransactions()) {
           alert("success");
+          fetch(`${document.location.origin}/${this.props.entity.wallet.publicKey}/api/blocks/post`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(this.props.entity.blockchain.chain),
+    });
           history.push("/blocks");
         } else {
           alert("The mine-transactions block request did not complete.");

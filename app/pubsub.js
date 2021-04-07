@@ -18,15 +18,12 @@ class PubSub {
     this.subscriber.on("message", (channel, message) =>
       this.handleMessage(channel, message)
     );
-  }
-  get blockchain() {
-    return this.blockchain;
-  }
-  set blockchain(blockchain) {
-    this.blockchain = blockchain;
-  }
-  set chain(chain) {
-    this.blockchain.chain = chain;
+    this.subscriber.on("error", function (err) {
+    console.log("Error " + err);
+});
+    this.publisher.on("error", function (err) {
+    console.log("Error " + err);
+});
   }
   handleMessage(channel, message) {
     console.log(`Message received. Channel: ${channel}. Message: ${message}.`);

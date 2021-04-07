@@ -5,13 +5,9 @@ import history from "../history";
 
 class ConductTransaction extends Component {
   state = { recipient: "", amount: 0, knownAddresses: [] };
-  const account = this.props.entity;
 
   componentDidMount() {
-//change this
-    fetch(`${document.location.origin}/api/known-addresses`)
-      .then((response) => response.json())
-      .then((json) => this.setState({ knownAddresses: json }));
+    this.setState({ knownAddresses: this.props.entity.knownAddresses });
   }
 
   updateRecipient = (event) => {
@@ -26,22 +22,23 @@ class ConductTransaction extends Component {
     const { recipient, amount } = this.state;
     fetch(`${document.location.origin}/api/blocks`)
 	.then((response) => response.json())
-	.then((chain) => account.blockchain = chain)
+	.then((chain) => this.props.entity.blockchain = chain)
 	.then(() => {
-        let transaction = account.transactionPool.existingTransaction({
-    inputAddress: account.wallet.publicKey,
+        let transaction = this.props.entity.transactionPool.existingTransaction({
+    inputAddress: this.props.entity.wallet.publicKey,
   });
 		 try {
     if (transaction) {
-      transaction.update({ senderWallet: account.wallet, recipient, amount });
+      transaction.update({ senderWallet: this.props.entity.wallet, recipient, amount });
     } else {
-      transaction = account.wallet.createTransaction({
+      transaction = this.props.entity.wallet.createTransaction({
         recipient,
         amount,
-        chain: account.blockchain.chain,
+        chain: this.props.entity.blockchain.chain,
       });
     }
     return transaction;
+    
   } catch (error) {
     return false;
   }}
@@ -49,8 +46,12 @@ class ConductTransaction extends Component {
       .then((transaction) => {
 	if(transaction){
 		alert("yaay! its a success");
-            account.transactionPool.setTransaction(transaction);
-            account.broadcastTransaction(transaction);
+            this.props.entity.transactionPool.setTransaction(transaction);
+            fetch(`${document.location.origin}/api/transact`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(transaction),
+    });
         	history.push("/transaction-pool");
 	}
 
