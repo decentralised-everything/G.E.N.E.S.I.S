@@ -1,8 +1,10 @@
 const DEFAULT_PORT = 3000;
 
 const router = require("./server");
+
 const app = require("express");
-app.use(router);
+app.use("/", router);
+
 let PEER_PORT;
 if (process.env.GENERATE_PEER_PORT === "true") {
   PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
