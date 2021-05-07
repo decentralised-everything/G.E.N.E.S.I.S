@@ -1,11 +1,11 @@
 const router = require("./server");
-const authUser = require("./auth");
+const requireAuth = require("./auth/authMiddleware");
 const app = require("express");
 const cookieParser = require("cookie-parser");
 
-app.use(cookieParser())
-app.use(authUser);
-app.use("/", router);
+app.use(cookieParser());
+app.use("/", requireAuth, router);
+
 let PEER_PORT;
 if (process.env.GENERATE_PEER_PORT === "true") {
   PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);

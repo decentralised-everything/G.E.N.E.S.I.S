@@ -1,12 +1,11 @@
 const { Router } = require("express");
 const authController = require("./authController");
-const requireAuth = require("./authMiddleware");
 
 const router = Router();
 
 //analogy to app.methods
 //everytime they are called upon, the authController modules fire up
-router.use(requireAuth);
+
 router.get("/signup", authController.signup_get); //communicate with frontend, input
 router.post("/signup", authController.signup_post); //communicate with database
 router.get("/login", authController.login_get);
