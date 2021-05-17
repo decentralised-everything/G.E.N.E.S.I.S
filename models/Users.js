@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     // wallet that will be used to bid
     type: Number,
     required: true,
-    default: 5000,
+    default: 50,
   },
   bioData: {
     type: String,
