@@ -39,7 +39,7 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^5.0.1",
     "elliptic": "^6.5.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "heroku": "^7.2.0",
     "heroku-cli": "^6.15.31",
     "hex-to-binary": "^1.0.1",
